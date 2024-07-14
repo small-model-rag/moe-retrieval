@@ -1,0 +1,17 @@
+[
+    {
+        "filename": "1602_longlora_efficient_fine_tuning.pdf",
+        "content": " The Redpajama dataset is used for training the model.",
+        "id": "01c9a681-1147-4e5a-b509-2f2fb64fa070"
+    },
+    {
+        "filename": "1602_longlora_efficient_fine_tuning.pdf",
+        "content": " The subsection does not provide information on the dataset used for training the model.",
+        "id": "d9e700b0-230e-4824-af6b-892748c639e7"
+    },
+    {
+        "filename": "1602_longlora_efficient_fine_tuning.pdf",
+        "content": " The subsection provided compares various models to GPT-3.5-Turbo on long-context benchmarks, LongBench and LEval, and evaluates their win rates. The models compared are LongChat-7B, LongChat-v1.5-7B, Vicuna-v1.5-7B, and Ours-7B. The table shows the win-rate, wins, and ties for each model. The subsection also mentions that the models are fine-tuned to a 16384 context length and compares their performance with GPT-3.5-Turbo and other Llama2-based long-context models. The subsection also mentions a FLOPs profiling table for Llama2 7B on various context lengths and a training cost comparison table between Full Fine-Tuning, Plain LoRA, and LongLoRA.\n\nBased on the user prompt \"Which models were compared and what were their win rates?\", the relevant information from the subsection is:\n\n|Model|Win-rate|\n|---|---|\n|LongChat-7B (Li et al., 2023)|33.68|\n|LongChat-v1.5-7B (Li et al., 2023)|33.59|\n|Vicuna-v1.5-7B (Chiang et al., 2023)|25.52|\n|Ours-7B|39.06|\n\nThe win-rate is the percentage of wins out of the total number of matches played against GPT-3.5-Turbo. The higher the win-rate, the better the model performed.",
+        "id": "a8ddc27a-6d27-4ee1-a2fb-334ac157b968"
+    }
+]

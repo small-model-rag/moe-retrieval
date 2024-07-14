@@ -83,7 +83,7 @@ def driver(folder_path, prompt):
         for json_str in best_jsons:
             all_json.append(json.loads(json_str))
 
-    with open("data.json", "w") as file:
+    with open("question_one.json", "w") as file:
         json.dump(all_json, file, indent=4)
     return all_json
 

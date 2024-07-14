@@ -1,81 +1,30 @@
-import llama3Tokenizer from 'llama3-tokenizer-js'
-import {getRequiredEnvVar} from "./env.js";
+import llama3Tokenizer from "llama3-tokenizer-js";
+import { getRequiredEnvVar } from "./env.js";
 import OpenAI from "openai";
-import {z} from "zod";
-import {zodToJsonSchema} from "zod-to-json-schema";
+import { z } from "zod";
+import { zodToJsonSchema } from "zod-to-json-schema";
+import "./env.js";
 
-
-const sambaApiKey = getRequiredEnvVar("SAMBA_API_KEY")
-const sambaClientId = getRequiredEnvVar("SAMBA_CLIENT_ID")
-
-type UUID = string & { __brand: "uuid" }
+type UUID = string & { __brand: "uuid" };
 
 export function randomUUID<T extends UUID = UUID>(): T {
-    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, c => {
-        const r = Math.random() * 16 | 0
-        const v = c === "x" ? r : (r & 0x3 | 0x8)
-        return v.toString(16)
-    }) as T
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0;
+    const v = c === "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  }) as T;
 }
 
 interface ChatMessage {
-    role: "system" | "user";
-    content: string;
+  role: "system" | "user";
+  content: string;
 }
 
 interface RequestPayload {
-    inputs: ChatMessage[];
-    max_tokens: number;
-    stop: string[];
-    model: string;
-}
-
-
-async function makeChatCompletionRequest(
-    messages: ChatMessage[],
-    maxTokens: number,
-    stop: string[],
-    model: string
-) {
-    const url = `https://${sambaClientId}.snova.ai/api/v1/chat/completion`;
-
-    const payload: RequestPayload = {
-        inputs: messages,
-        max_tokens: maxTokens,
-        stop: stop,
-        model: model,
-    };
-
-    const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-            'Authorization': `Basic ${sambaApiKey}`,
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-    });
-
-    if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    // return response.json();
-    const events = await response.text();
-
-    // console.log("Response: ", events);
-
-    // take the last 2 lines: event: ..., data: {...}
-    const lines = events.split('\n');
-
-    const eventType = lines[lines.length - 4].substring(7)
-    const data = JSON.parse(lines[lines.length - 3].substring(6));
-    // console.log("Event Type: ", eventType);
-
-    if (!data.is_last_response) {
-        throw new Error("Expected last response to be true");
-    }
-
-    return data.completion
+  inputs: ChatMessage[];
+  max_tokens: number;
+  stop: string[];
+  model: string;
 }
 
 // async function callLlama3(messages: ChatMessage[], maxTokens: number = 800) {
@@ -83,67 +32,70 @@ async function makeChatCompletionRequest(
 // }
 
 async function callLlama3Json(messages: ChatMessage[]) {
-    // Defining the Together.ai client
-    const togetherai = new OpenAI({
-        apiKey: process.env.TOGETHER_API_KEY,
-        baseURL: 'https://api.together.xyz/v1',
-    });
+  // Defining the Together.ai client
+  const togetherai = new OpenAI({
+    apiKey: getRequiredEnvVar("TOGETHER_API_KEY"),
+    baseURL: "https://api.together.xyz/v1",
+  });
 
-// Defining the schema we want our data in
-    const snippetIdsSchema = z.array(z.string().describe('A snippet ID')).describe('An array of snippet IDs');
-    const jsonSchema = zodToJsonSchema(snippetIdsSchema, 'snippetIdsSchema');
+  // Defining the schema we want our data in
+  const snippetIdsSchema = z
+    .array(z.string().describe("A snippet ID"))
+    .describe("An array of snippet IDs");
+  const jsonSchema = zodToJsonSchema(snippetIdsSchema, "snippetIdsSchema");
 
+  const extract = await togetherai.chat.completions.create({
+    messages: messages,
+    model: "mistralai/Mixtral-8x7B-Instruct-v0.1",
+    // @ts-ignore – Together.ai supports schema while OpenAI does not
+    response_format: { type: "json_object", schema: jsonSchema },
+  });
 
-    const extract = await togetherai.chat.completions.create({
-        messages: messages,
-        model: 'mistralai/Mixtral-8x7B-Instruct-v0.1',
-        // @ts-ignore – Together.ai supports schema while OpenAI does not
-        response_format: {type: 'json_object', schema: jsonSchema},
-    });
-
-    return JSON.parse(extract.choices[0].message.content!);
+  return JSON.parse(extract.choices[0].message.content!);
 }
 
 interface BaseSnippet {
-    id: UUID,
-    filename: string;
-    lastModified: string;
+  id: UUID;
+  filename: string;
+  lastModified: string;
 }
 
 interface Image extends BaseSnippet {
-    resolution: {
-        width: number;
-        height: number;
-    }
+  resolution: {
+    width: number;
+    height: number;
+  };
 }
 
 interface Document extends BaseSnippet {
-    content: string;
+  content: string;
 }
 
 type Snippet = Image | Document;
 
 function countTokens(prompt: string) {
-    return llama3Tokenizer.encode(prompt).length;
+  return llama3Tokenizer.encode(prompt).length;
 }
 
 function countMessageTokens(m: ChatMessage) {
-    return countTokens(m.content);
+  return countTokens(m.content);
 }
 
 export async function select(
-    query: string,
-    snippets: Snippet[],
-    maxResults: number = 10
+  query: string,
+  snippets: Snippet[],
+  maxResults: number = 10
 ): Promise<UUID[]> {
-    const value = {query, maxResults};
+  const value = { query, maxResults };
 
-    console.log(`Selecting <${maxResults} snippets from ${snippets.length} snippets for query: ${query}`);
+  console.log(
+    `Selecting <${maxResults} snippets from ${snippets.length} snippets for query: ${query}`
+  );
 
-    const messages: ChatMessage[] = [
-        {
-            role: 'system',
-            content: `You are an assistant that picks the N most relevant snippets, to help another assistant answer a user query. 
+  const messages: ChatMessage[] = [
+    {
+      role: "system",
+      content: `You are an assistant that picks the N most relevant snippets, to help another assistant answer a user query. 
 The responses will be in the form SnippetId[] - where the length is at most N.
 The snippets should be ordered by relevance, and if there are no relevant snippets to the query, we can return an empty array, for optimization purposes.
 
@@ -202,51 +154,52 @@ Response: ["w09efj2390fj3290", "nf4fn93nf398fn43"]
 User:
 { query: "What's the capital of France?", maxResults: 10 }
 
-Response: [] -- No relevant snippets found.`
-        },
-        {
-            role: 'user',
-            content: JSON.stringify(value)
-        }
-    ];
+Response: [] -- No relevant snippets found.`,
+    },
+    {
+      role: "user",
+      content: JSON.stringify(value),
+    },
+  ];
 
-    let totalTokens = messages.map(countMessageTokens)
-        .reduce((a, b) => a + b, 0);
+  let totalTokens = messages.map(countMessageTokens).reduce((a, b) => a + b, 0);
 
-    const MAX_TOKEN_LIMIT = 7800;
+  const MAX_TOKEN_LIMIT = 7800;
 
-    const finalSnippets: Snippet[] = [];
+  const finalSnippets: Snippet[] = [];
 
-    while (totalTokens < MAX_TOKEN_LIMIT && snippets.length > 0) {
-        const nextSnippet = snippets.pop()!;
+  while (totalTokens < MAX_TOKEN_LIMIT && snippets.length > 0) {
+    const nextSnippet = snippets.pop()!;
 
-        finalSnippets.push(nextSnippet);
-        totalTokens += countTokens(JSON.stringify(nextSnippet))
+    finalSnippets.push(nextSnippet);
+    totalTokens += countTokens(JSON.stringify(nextSnippet));
+  }
+
+  messages.push({
+    role: "system",
+    content: `Snippets: ${JSON.stringify(finalSnippets)}`,
+  });
+
+  const localSelection: UUID[] = await callLlama3Json(messages);
+
+  if (snippets.length > 0) {
+    console.log(
+      `Used ${finalSnippets.length} snippets to partially select - returned ${localSelection} - remaining ${snippets.length} snippets`
+    );
+    const otherSelection = await select(query, [...snippets], maxResults);
+
+    const finalSelection: UUID[] = [...localSelection, ...otherSelection];
+
+    if (localSelection.length === 0 || otherSelection.length === 0) {
+      return finalSelection;
     }
 
-    messages.push({
-        role: 'system',
-        content: `Snippets: ${JSON.stringify(finalSnippets)}`
-    })
+    return select(
+      query,
+      finalSelection.map((id) => snippets.find((s) => s.id === id)!),
+      maxResults
+    );
+  }
 
-    const localSelection: UUID[] = await callLlama3Json(messages);
-
-    if (snippets.length > 0) {
-        console.log(`Used ${finalSnippets.length} snippets to partially select - returned ${localSelection} - remaining ${snippets.length} snippets`);
-        const otherSelection = await select(query, [...snippets], maxResults);
-
-        const finalSelection: UUID[] = [...localSelection, ...otherSelection];
-
-        if (localSelection.length === 0 || otherSelection.length === 0) {
-            return finalSelection;
-        }
-
-        return select(
-            query,
-            finalSelection.map(id => snippets.find(s => s.id === id)!),
-            maxResults
-        )
-    }
-
-    return localSelection;
+  return localSelection;
 }
