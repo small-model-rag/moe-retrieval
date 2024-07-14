@@ -1,5 +1,8 @@
 import llama3Tokenizer from 'llama3-tokenizer-js'
 import {getRequiredEnvVar} from "./env.js";
+import OpenAI from "openai";
+import {z} from "zod";
+import {zodToJsonSchema} from "zod-to-json-schema";
 
 
 const sambaApiKey = getRequiredEnvVar("SAMBA_API_KEY")
@@ -59,14 +62,14 @@ async function makeChatCompletionRequest(
     // return response.json();
     const events = await response.text();
 
-    console.log("Response: ", events);
+    // console.log("Response: ", events);
 
     // take the last 2 lines: event: ..., data: {...}
     const lines = events.split('\n');
 
     const eventType = lines[lines.length - 4].substring(7)
     const data = JSON.parse(lines[lines.length - 3].substring(6));
-    console.log("Event Type: ", eventType);
+    // console.log("Event Type: ", eventType);
 
     if (!data.is_last_response) {
         throw new Error("Expected last response to be true");
@@ -75,8 +78,30 @@ async function makeChatCompletionRequest(
     return data.completion
 }
 
-async function callLlama3(messages: ChatMessage[], maxTokens: number = 800) {
-    return await makeChatCompletionRequest(messages, maxTokens, ['<|eot_id|>'], 'llama3-8b')
+// async function callLlama3(messages: ChatMessage[], maxTokens: number = 800) {
+//     return await makeChatCompletionRequest(messages, maxTokens, ['<|eot_id|>'], 'llama3-8b')
+// }
+
+async function callLlama3Json(messages: ChatMessage[]) {
+    // Defining the Together.ai client
+    const togetherai = new OpenAI({
+        apiKey: process.env.TOGETHER_API_KEY,
+        baseURL: 'https://api.together.xyz/v1',
+    });
+
+// Defining the schema we want our data in
+    const snippetIdsSchema = z.array(z.string().describe('A snippet ID')).describe('An array of snippet IDs');
+    const jsonSchema = zodToJsonSchema(snippetIdsSchema, 'snippetIdsSchema');
+
+
+    const extract = await togetherai.chat.completions.create({
+        messages: messages,
+        model: 'mistralai/Mixtral-8x7B-Instruct-v0.1',
+        // @ts-ignore – Together.ai supports schema while OpenAI does not
+        response_format: {type: 'json_object', schema: jsonSchema},
+    });
+
+    return JSON.parse(extract.choices[0].message.content!);
 }
 
 interface BaseSnippet {
@@ -112,6 +137,8 @@ export async function select(
     maxResults: number = 10
 ): Promise<UUID[]> {
     const value = {query, maxResults};
+
+    console.log(`Selecting <${maxResults} snippets from ${snippets.length} snippets for query: ${query}`);
 
     const messages: ChatMessage[] = [
         {
@@ -190,7 +217,7 @@ Response: [] -- No relevant snippets found.`
 
     const finalSnippets: Snippet[] = [];
 
-    while (totalTokens > MAX_TOKEN_LIMIT && snippets.length > 0) {
+    while (totalTokens < MAX_TOKEN_LIMIT && snippets.length > 0) {
         const nextSnippet = snippets.pop()!;
 
         finalSnippets.push(nextSnippet);
@@ -202,11 +229,12 @@ Response: [] -- No relevant snippets found.`
         content: `Snippets: ${JSON.stringify(finalSnippets)}`
     })
 
-    const rawResponse = await callLlama3(messages);
-    const localSelection: UUID[] = JSON.parse(rawResponse);
+    const localSelection: UUID[] = await callLlama3Json(messages);
 
     if (snippets.length > 0) {
+        console.log(`Used ${finalSnippets.length} snippets to partially select - returned ${localSelection} - remaining ${snippets.length} snippets`);
         const otherSelection = await select(query, [...snippets], maxResults);
+
         const finalSelection: UUID[] = [...localSelection, ...otherSelection];
 
         if (localSelection.length === 0 || otherSelection.length === 0) {
