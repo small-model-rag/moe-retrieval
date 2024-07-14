@@ -108,7 +108,57 @@ def get_text_from_ids(output_ids, json_file="data.json"):
 if __name__ == "__main__":
     pdf_folder = '/Users/justin/Desktop/Everything/Code/small_model_moe_rag/data/pdf/'
     prompt = "What dataset is used for training the model?"
+
+
+    # if number == 0:
+#       prompt = "What dataset is used to train the model."
+#       json_file = "data.json"  # This is the file created by your Python script
+#   elif number == 1:
+#       prompt = "Tell me about the evaluation dataset used in MetaGPT and compare it against SWE-Bench."
+#       json_file = "question_one.json"  # This is the file created by your Python script
+#   elif number == 2:
+#       prompt = "What is the exact improvement in ROUGE-1 score that LoftQ achieves over QLoRA for the XSum dataset using 4-bit NF4 quantization with rank 16?"
+#       json_file = "question_five.json"  # This is the file created by your Python script
+#   elif number == 3:
+#       prompt = "What is the perplexity score for LoftQ on LLAMA-2-13b using 2-bit quantization on the WikiText-2 dataset?"
+#       json_file = "question_six.json"  # This is the file created by your Python script
+#   else:
+#       prompt = "Knowledge card Top-down exp improves Codex by how much in the Generate GKP Model for STEM?"
+#       json_file = "question_seven.json"  # This is the file created by your Python script
+
+    print("""
+    0: What dataset is used to train the model.
+    1: Tell me about the evaluation dataset used in MetaGPT and compare it against SWE-Bench.
+    2: What is the exact improvement in ROUGE-1 score that LoftQ achieves over QLoRA for the XSum dataset using 4-bit NF4 quantization with rank 16?
+    3: What is the perplexity score for LoftQ on LLAMA-2-13b using 2-bit quantization on the WikiText-2 dataset?
+    4: Knowledge card Top-down exp improves Codex by how much in the Generate GKP Model for STEM?
+""")
+
+
+
+    # Read number from CLI
+    number = int(input("Choose a question: "))
+
+
+
+    if number == 0:
+        prompt = "What dataset is used to train the model."
+        json_file = "data.json"  # This is the file created by your Python script
+    elif number == 1:
+        prompt = "Tell me about the evaluation dataset used in MetaGPT and compare it against SWE-Bench."
+        json_file = "question_one.json"  # This is the file created by your Python script
+    elif number == 2:
+        prompt = "What is the exact improvement in ROUGE-1 score that LoftQ achieves over QLoRA for the XSum dataset using 4-bit NF4 quantization with rank 16?"
+        json_file = "question_five.json"  # This is the file created by your Python script
+    elif number == 3:
+        prompt = "What is the perplexity score for LoftQ on LLAMA-2-13b using 2-bit quantization on the WikiText-2 dataset?"
+        json_file = "question_six.json"  # This is the file created by your Python script
+    else:
+        prompt = "Knowledge card Top-down exp improves Codex by how much in the Generate GKP Model for STEM?"
+        json_file = "question_seven.json"  # This is the file created by your Python script
+
+    print(f"Processing query: {prompt}")
+
     ts_script = "/Users/justin/Desktop/Everything/Code/small_model_moe_rag/resolver/main.ts"
-    json_file = "data.json"  # This is the file created by your Python script
 
     orchestrate(pdf_folder, prompt, ts_script, json_file)
