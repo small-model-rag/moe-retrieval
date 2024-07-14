@@ -1,5 +1,217 @@
 [
-    "{\"filename\": \"1602_longlora_efficient_fine_tuning.pdf\", \"content\": \" The Redpajama dataset is used for training the model.\"}",
-    "{\"filename\": \"1602_longlora_efficient_fine_tuning.pdf\", \"content\": \" The subsection does not provide information on the dataset used for training the model.\"}",
-    "{\"filename\": \"1602_longlora_efficient_fine_tuning.pdf\", \"content\": \" The subsection provided compares various models to GPT-3.5-Turbo on long-context benchmarks, LongBench and LEval, and evaluates their win rates. The models compared are LongChat-7B, LongChat-v1.5-7B, Vicuna-v1.5-7B, and Ours-7B. The table shows the win-rate, wins, and ties for each model.\\n\\nBased on the information provided in the table, none of the models have a win-rate of 100%, meaning that none of them won against GPT-3.5-Turbo in all comparisons. Ours-7B has the highest win-rate of 39.06%, followed by LongChat-7B with a win-rate of 33.68%. Vicuna-v1.5-7B has the lowest win-rate of 25.52%.\\n\\nIt is important to note that the table only shows the results of comparisons on long-context benchmarks and does not provide information on the performance of the models on other types of tasks or datasets. Therefore, it is not possible to determine the overall performance of the models based on this table alone.\"}"
+  {
+    "filename": "1602_longlora_efficient_fine_tuning.pdf",
+    "content": " The Redpajama dataset is used for training the model.",
+    "id": "37b1ab2a-6e8e-4fd5-8bb8-ca71b5f6109c"
+  },
+  {
+    "filename": "1602_longlora_efficient_fine_tuning.pdf",
+    "content": " The subsection does not provide information on the dataset used for training the model.",
+    "id": "1fca2183-264e-421b-ab9d-e5e5778c4f25"
+  },
+  {
+    "filename": "1602_longlora_efficient_fine_tuning.pdf",
+    "content": " The subsection provided compares various models to GPT-3.5-Turbo on long-context benchmarks, LongBench and LEval, and evaluates their win rates. The models are fine-tuned to a 16384 context length using the supervised fine-tuning method and data introduced in Section B.6. The table shows that the model 7B presents comparable or better performance than other Llama2-based long-context models, while only taking a short amount of time and a small number of tokens to train.\n\nUser prompt: Which models were compared on the long-context benchmarks and how did they perform?\n\nAnswer: The models compared on the long-context benchmarks were GPT-3.5-Turbo, Llama2 7B fine-tuned to a 16384 context length, Vicuna-v1.5-7B, and LongChat-v1.5-7B. The Llama2 7B model presented comparable or better performance than the other models, while only taking 4 hours and about 0.3 billion tokens to train on a single 8\u00d7 A100 machine.",
+    "id": "fb57fdc5-dc6f-4e01-a5b0-3d18a1341169"
+  },
+  {
+    "filename": "7536_loftq_lora_fine_tuning_aware_q.pdf",
+    "content": " The subsection provided does not explicitly mention the dataset used for training the model. It focuses on the introduction and methodology of LoftQ, a novel quantization framework for pre-trained models that require quantization and LoRA fine-tuning. The authors evaluate their method on downstream tasks such as NLU, question answering, summarization, and NLG but do not specify the dataset used in the experiments.",
+    "id": "853ee09d-3d03-4ce4-bcd1-3ec933db4dc3"
+  },
+  {
+    "filename": "7536_loftq_lora_fine_tuning_aware_q.pdf",
+    "content": " The subsection does not provide information on the dataset used for training the model. Therefore, I cannot answer this query.",
+    "id": "9c71e31f-69fa-482a-b7a8-b0a642b04262"
+  },
+  {
+    "filename": "7536_loftq_lora_fine_tuning_aware_q.pdf",
+    "content": " The subsection provided does not give information on which dataset is used for training the model. However, it mentions two datasets, WikiText-2 and GSM8K, in the context of specifying the batch size and number of epochs for training. Without more information, it's not possible to determine which of these two datasets is used for training.",
+    "id": "10273913-baa2-4757-a2a0-aa7c1b6cbfe7"
+  },
+  {
+    "filename": "5586_zipformer_a_faster_and_better_.pdf",
+    "content": " The model is trained on the LibriSpeech, Aishell-1, and WenetSpeech datasets.",
+    "id": "0a890e97-d0fc-487f-bf84-e5becc4a0e41"
+  },
+  {
+    "filename": "5586_zipformer_a_faster_and_better_.pdf",
+    "content": " The subsection does not provide information on the dataset used for training the Zipformer model. Therefore, I cannot answer this query.\n\n> Our Zipformer-L outperforms Squeezeformer-L, Branchformer and our reproduced Conformer-L by a large margin while saving over 50% FLOPs...\n>\n> When trained on 8 80G NVIDIA Tesla A100 GPUs for 170 epochs, Zipformer-L achieves WERs of 2.00%/4.38%...\n>\n> Figure 3 presents the comparison results in terms of averaged inference time and peak memory usage in inference mode for batches of 30-second audios on an NVIDIA Tesla V100 GPU...\n>\n> The batch size is set to 30 to ensure all models do not have out of memory problems during inference...\n>\n> In overall, Zipformer models achieve better trade-off between performance and efficiency than other models...\n>\n> Especially for the large scale, Zipformer-L requires much less computation time and memory than other counterparts...\n>\n> |6.5|XSS|Zipformer, pruned transducer|6.5|S|XS|Zipformer, pruned transducer|\n>\n> |6.0|E-Branchformer, CTC/AED|6.0|E-Branchformer, CTC/AED|\n>\n> |5.5|SSMM|Squeezeformer, CTC|5.5|S|Squeezeformer, CTC|\n>\n> | |Conformer, pruned transducer| |M|Conformer, pruned transducer|\n>\n> |5.0| |5.0|SM|\n>\n> |4.5|M|ML|4.5|M|ML|\n>\n> |S|B|L| |S|LB|L|\n>\n> |4.0| |L|4.0|\n>\n> |3.5|M|L| |L|3.5|ML|L|\n>\n> | | | |200|400|600|800|1000|1200| |2|4|6|8|10|12|14|16|\n>\n> | |Averaged inference time (ms)| | |Peak memory usage (GB)|\n>\n> Table 3 shows the CERs on Aishell-1 dataset...\n>\n> Compared to the Conformer model implemented in ESPnet toolkit, our Zipformer-S achieves better performance with fewer parameters...\n>\n> Scaling up the model leads to lower WERs, and Zipformer-M/L outperform all other models...\n>\n> Table 4: CER(%) comparison between different models on WenetSpeech dataset...\n>\n> We perform ablation experiments on LibriSpeech dataset to investigate the effect of each proposed functional technique...\n>\n> With Zipformer-M as the base model, we make one change each time while keeping the others untouched...\n>\n> Encoder structure. We remove the temporal downsampling structure from Zipformer and use Conv-Embed with downsampling rate of 4 like Conformer...\n>\n> Block structure. As each Zipformer block has roughly twice modules as a Conformer block, we replace each Zipformer block in the base model with two Conformer blocks stacked together...\n>\n> Normalization layer. Replacing BiasNorm with LayerNorm in Zipformer leads to WER drops of 0.08% and 0.18% on test-clean and test-other, respectively...\n>\n> Activation function. When using only SwooshR for all modules in Zipformer, the WER drops by 0.11% and 0.42% on test-clean and test-other, respectively...\n>\n> Optimizer. When using Adam to train Zipformer, we have to apply BiasNorm for each module in Zipformer block to avoid model divergence...\n>\n> We try different learning rate factors (denoted as \u03b1base) for ScaledAdam (0.025, 0.035, 0.045, 0.055) and Adam (2.5, 5.0, 7.5, 10.0) separately...\n>\n> Following (Gulati et al., 2020), the learning rate schedule for Adam is \u03b1t = \u03b1base \u00b7 512\u22120.5 \u00b7 min(t\u22120.5, t \u00b7 10000\u22121.5)...\n>\n> ScaledAdam outperforms Adam by 0.17% and 0.72% on test-clean and test-other, respectively...\n>\n> In this work, we present the Zipformer, which serves as an efficient ASR encoder...\n>\n> It has an U-Net-like encoder structure, which downsamples the sequence to various lower frame rates...\n>\n> The re-designed block structure equipped with more modules reuses the computed attention weights for efficiency...\n>\n> It also employs the new normalization method BiasNorm, as well as the new activation functions SwooshR and SwooshL...\n>\n> Meanwhile, the proposed optimizer ScaledAdam enables faster convergence and better performance...\n>\n> Extensive experiments on LibriSpeech, Aishell-1 and Wenet-Speech datasets have demonstrated the effectiveness of the proposed Zipformer...",
+    "id": "f1d3bd29-11ee-426a-a3f8-a898cbd2a18f"
+  },
+  {
+    "filename": "5586_zipformer_a_faster_and_better_.pdf",
+    "content": " The LibriSpeech dataset is used for training the model.",
+    "id": "faab5a3a-a442-4979-9361-a5cc6f50317a"
+  },
+  {
+    "filename": "4906_finetuning_text_to_image_diffu.pdf",
+    "content": " The subsection discusses a method for reducing biases in text-to-image (T2I) diffusion models. The authors frame fairness as a distributional alignment problem and propose a loss function that steers the generated images towards the desired distribution while preserving image semantics. They also introduce adjusted direct finetuning of diffusion models (adjusted DFT), which aims to directly finetune the diffusion model's sampling process to minimize any loss defined on the generated images. The method is shown to markedly reduce gender, racial, and their intersectional biases for occupational prompts, and it is flexible, allowing users to specify the desired target distribution.\n\nPrompt: How does the proposed method mitigate biases in T2I diffusion models?\n\nThe proposed method mitigates biases in T2I diffusion models by framing fairness as a distributional alignment problem and introducing a loss function that steers the generated images towards the desired distribution while preserving image semantics. Additionally, the authors propose adjusted DFT, which directly finetunes the diffusion model's sampling process to minimize any loss defined on the generated images. The method is shown to be effective in reducing gender, racial, and their intersectional biases for occupational prompts.",
+    "id": "8e3857fc-ee18-4acc-a75e-7fc748716bbd"
+  },
+  {
+    "filename": "4906_finetuning_text_to_image_diffu.pdf",
+    "content": " The prioritization of finetuning the language understanding components, including the prompt and the text encoder, is demonstrated in the subsection. This encourages the model to maintain a holistic visual representation of gender and racial identities, rather than manipulating low-level pixels to signal gender and race. The specific details about the datasets used for training the model are not provided in the subsection.",
+    "id": "34c47c22-0eda-4554-85ff-bb6d1f56966d"
+  },
+  {
+    "filename": "4906_finetuning_text_to_image_diffu.pdf",
+    "content": " The model was trained on a large dataset, but the specific details of the dataset are not provided in the given subsection.",
+    "id": "1247ec42-e818-41a4-8aca-c93feb48cf6a"
+  },
+  {
+    "filename": "4906_finetuning_text_to_image_diffu.pdf",
+    "content": " The subsection does not provide specific information about the dataset used for training the model. However, it mentions the use of certain occupations and sports for generating images.",
+    "id": "cb8a6882-3dbf-4200-b573-87833572aff6"
+  },
+  {
+    "filename": "6283_self_rag_learning_to_retrieve_.pdf",
+    "content": " The subsection provided does not seem to contain a direct answer to the user prompt. However, I can provide the parts of the subsection that are relevant to the process of training a model, which might be helpful in understanding how the model is prepared.\n\n1. **Training data and settings**\n   - The training data consists of diverse instruction-following input-output pairs, with 150k instances sampled from Open-Instruct processed data and knowledge-intensive datasets.\n   - The generator base LM is Llama2 7B and 13B, and the base critic LM is Llama2 7B.\n   - The retriever model R is off-the-shelf Contriever-MS MARCO, retrieving up to ten documents for each input.\n\n2. **Inference settings**\n   - The default configuration assigns weight terms ISREL, ISSUP, ISUSE values of 1.0, 1.0, and 0.5, respectively.\n   - The retrieval threshold is set to 0.2 for most tasks and to 0 for ALCE due to citation requirements.\n   - Inference is sped up using vllm, and a beam width of 2 is adopted at each segment level.\n   - The top five documents from Contriever-MS MARCO are used by default, with additional top five documents retrieved by a web search engine for biographies and open-domain QA.\n\nI hope this information is helpful for your needs. If you have any other questions or need further clarification, please let me know.",
+    "id": "b76ca35d-e8f2-40ce-a00b-20941a5948fd"
+  },
+  {
+    "filename": "6283_self_rag_learning_to_retrieve_.pdf",
+    "content": " The subsection discusses the analysis of the SELF-RAG framework and its components. The analysis is based on ablation studies conducted on three datasets, PopQA, PubHealth, and ASQA. The results show that all components of SELF-RAG play important roles and there is a large performance gap between SELF-RAG and No Retriever or Critic baselines across tasks. The ablation studies also evaluate the effects of inference-time customization and the efficiency and accuracy trade-off of the framework.\n\nPrompt: Which factors play key roles in the SELF-RAG framework, as identified by the ablation studies?\n\nAnswer: The ablation studies identified two model variants, No Retriever and No Critic, trained differently than the model. The studies also evaluated the inference-time algorithm, including No retrieval, Hard constraints, Retrieve top 1, and Remove ISSUP. The results showed that all components of SELF-RAG play important roles and there is a large performance gap between SELF-RAG and No Retriever or Critic baselines across tasks.",
+    "id": "a37ebe90-892a-4072-9ac4-b293437478e5"
+  },
+  {
+    "filename": "6283_self_rag_learning_to_retrieve_.pdf",
+    "content": " The subsection provided does not seem to contain information about the specific dataset used for training a model. However, it does mention the use of several datasets for training, including Open-Instruct, Natural Questions, Wizard of Wikipedia, FEVER, ASQA, and multiple QA datasets including ARC-Easy and OpenBookQA. It also mentions the use of 145,619 instances for training.",
+    "id": "ae254e72-5607-41d7-a574-0b7536c23201"
+  },
+  {
+    "filename": "6283_self_rag_learning_to_retrieve_.pdf",
+    "content": " Empty string, as the subsection does not provide information on the dataset used for training the model.",
+    "id": "87569fb8-7aba-4e26-98cd-d378d67d9229"
+  },
+  {
+    "filename": "4686_knowledge_card_filling_llms_kn.pdf",
+    "content": " The subsection given is about a proposed framework called KNOWLEDGE CARD, which aims to empower general-purpose language models with modular and collaboratively-sourced knowledge through the integration of smaller, specialized language models. The authors argue that existing approaches rely too heavily on a single source of knowledge and do not allow for flexible and targeted information access or the ability to incorporate diverse and evolving knowledge from multi-faceted sources and perspectives. They propose knowledge cards, which are specialized LMs trained on diversified knowledge corpora from a wide range of domains and sources, to serve as modular knowledge repositories. These knowledge cards are then prompted to generate background information to support general-purpose LLMs. The authors also propose three levels of knowledge selectors to dynamically select and refine generated documents and control for topic relevance, document brevity, and knowledge factuality.\n\nThe user prompt is: \"What dataset is used for training the model?\" This information is not provided in the given subsection. The subsection focuses on the overall concept and approach of KNOWLEDGE CARD, and does not provide specific details about the datasets used for training the models.",
+    "id": "6867be37-0012-440d-9414-26f6af086652"
+  },
+  {
+    "filename": "4686_knowledge_card_filling_llms_kn.pdf",
+    "content": " The subsection does not provide information on the dataset used for training the model. However, it does provide information on the Knowledge Card Text-Davinci-003 and GPT-3.5-Turbo models:\n\n\"Figure 5: KNOWLEDGE CARD TEXT-DAVINCI-003 and GPT-3.5-TURBO.\"\n\nIt also discusses the use of a Wikipedia LM in KNOWLEDGE CARD and compares it to the REPLUG retrieval LM:\n",
+    "id": "9c9c6d15-9423-4687-962f-d82328f4e96d"
+  },
+  {
+    "filename": "4686_knowledge_card_filling_llms_kn.pdf",
+    "content": " The subsection does not provide information about the dataset used for training a specific model.",
+    "id": "cb708833-079c-4bb3-b191-9ab41b185cc9"
+  },
+  {
+    "filename": "4686_knowledge_card_filling_llms_kn.pdf",
+    "content": " Prompt: Who is the senior senator from Tom Brady\u2019s birth place?\n\nAlgorithm 1 (Bottom-Up Approach):\nThe algorithm does not directly apply to this prompt, as it requires a specific knowledge source.\n\nAlgorithm 2 (Top-Down Approach):\n\nData:\n- question q;\n- in-context examples prompt sicl;\n- knowledge cards C = {pubmed, yelp, realnews\\_1, wikipedia, realnews\\_2, realnews\\_3, realnews\\_4, acl\\_papers, map, 1B, kgap, cpnet, gutenberg, POLITICS, reddit, IMDB, ddb, wikidata, yago, midterm, bookcorpus, legal\\_contracts, atomic, opensubtitles, twitter};\n- knowledge card names S = {\"pubmed\", \"yelp\", \"realnews\\_1\", \"wikipedia\", \"realnews\\_2\", \"realnews\\_3\", \"realnews\\_4\", \"acl\\_papers\", \"map\", \"1B\", \"kgap\", \"cpnet\", \"gutenberg\", \"POLITICS\", \"reddit\", \"IMDB\", \"ddb\", \"wikidata\", \"yago\", \"midterm\", \"bookcorpus\", \"legal\\_contracts\", \"atomic\", \"opensubtitles\", \"twitter\"};\n- max trial k;\n- relevance and factuality selector \u03d5rel; \u03d5fact;\n- binary flags AUTO and EXP\n\nResult: answer string sans\n\nThe algorithm would use the top-down approach to ask follow-up questions to gather more information and then select a knowledge card to find the answer.\n\nExample prompts:\nPROMPT = \"Do you need more information? (Yes or No)\"\nRESPONSE = LLM(PROMPT)\n\nIf the response is \u201cYes\u201d, the algorithm would ask:\nPROMPT = \"What is the birth place of Tom Brady? (Please provide the state)\"\nRESPONSE = LLM(PROMPT)\n\nWith the birth place, the algorithm can then select a knowledge card, such as wikipedia, and find the answer to the question.",
+    "id": "0ff8feb6-01a5-4822-b480-5a9cc0027b03"
+  },
+  {
+    "filename": "5488_metagpt_meta_programming_for_a.pdf",
+    "content": " The subsection provided does not contain information about the dataset used for training the model. It mainly discusses the architecture, capabilities, and some details about the model's performance.",
+    "id": "ef6255aa-1ddb-49b7-a5c0-ff8d84cf5c46"
+  },
+  {
+    "filename": "5488_metagpt_meta_programming_for_a.pdf",
+    "content": " The subsection does not provide information about the dataset used for training the model.",
+    "id": "46cf9add-8a53-4c88-8f85-a45783390b16"
+  },
+  {
+    "filename": "5488_metagpt_meta_programming_for_a.pdf",
+    "content": " The subsection provided does not directly answer the query about the dataset used for training the model. However, it does mention the \"SoftwareDev\" dataset in the context of the paper's experiments. This dataset includes 70 diverse software development tasks, with 11 tasks displayed in Table 8. The first seven tasks from this table are used in the main experiments of the paper.",
+    "id": "1295d7f3-7adf-4ad2-879e-5c285290c0f6"
+  },
+  {
+    "filename": "4678_metra_scalable_unsupervised_rl.pdf",
+    "content": " The subsection does not provide information on the specific dataset used for training the model. It only mentions that the model is trained on locomotion and manipulation environments.",
+    "id": "79209651-b20f-4217-8ce5-79a55066d902"
+  },
+  {
+    "filename": "4678_metra_scalable_unsupervised_rl.pdf",
+    "content": " The subsection does not provide information on the specific dataset used for training the model. However, it mentions that the model is evaluated on five robotic locomotion and manipulation environments: HalfCheetah, Ant (both state-based and from Gym), Quadruped and Humanoid (both pixel-based and from the DeepMind Control Suite), and Kitchen (pixel-based and from Gupta et al. and Mendonca et al.).",
+    "id": "17f09e36-73a9-4399-a95c-e64f01e8fda3"
+  },
+  {
+    "filename": "4678_metra_scalable_unsupervised_rl.pdf",
+    "content": " The subsection provided does not contain information about the dataset used for training the model.",
+    "id": "a184ae67-bc43-4842-a682-e10e7fefa5b4"
+  },
+  {
+    "filename": "4678_metra_scalable_unsupervised_rl.pdf",
+    "content": " The subsection provided does not mention any specific dataset used for training the model. It mainly focuses on the derivation of the objectives for different methods and their analogies with each other.",
+    "id": "ab7d1a68-999e-4aa8-b4d6-423e34ab6c75"
+  },
+  {
+    "filename": "5104_values_a_framework_for_systema.pdf",
+    "content": " The LIDC-IDRI (LIDC) dataset is used for training the model. It is a real-world dataset with the task to segment long nodules in 64x64x6",
+    "id": "680ef50e-b3d5-4ad5-941b-1b0a62467dd4"
+  },
+  {
+    "filename": "5104_values_a_framework_for_systema.pdf",
+    "content": " The subsection provided does not explicitly mention the dataset used for training the model. It focuses on the robustness of trends across datasets and distribution shifts, and provides a table with results on various datasets such as GTA5/CS, LIDC, and UDC, but it does not specify which one was used for training.",
+    "id": "25758434-53fe-4738-a1c6-969d79b70b60"
+  },
+  {
+    "filename": "5104_values_a_framework_for_systema.pdf",
+    "content": " The toy dataset is used for training the model.",
+    "id": "bb0d1455-5075-4f9f-858d-588368a5b456"
+  },
+  {
+    "filename": "5104_values_a_framework_for_systema.pdf",
+    "content": " The subsection given does not provide information on which dataset is used for training the model.",
+    "id": "48bf3e99-1ac3-4ffb-8f2e-288f0d1bbd10"
+  },
+  {
+    "filename": "6476_swe_bench_can_language_models_.pdf",
+    "content": " The dataset used for training the model is not explicitly stated in the provided subsection. However, it is mentioned that they collected 19,000 issue-PR pairs from an additional 37 popular Python package repositories for supervised fine-tuning of the CodeLlama-Python models.",
+    "id": "491a759c-8cf0-4d90-8f96-a5cedb343ec4"
+  },
+  {
+    "filename": "6476_swe_bench_can_language_models_.pdf",
+    "content": " The subsection does not provide information on the dataset used for training the model.",
+    "id": "3b6144d5-8ab1-4dc4-8116-6e1e67d665a9"
+  },
+  {
+    "filename": "6476_swe_bench_can_language_models_.pdf",
+    "content": " The subsection does not provide specific information about the dataset used for training the model. However, it does mention that the model is finetuned using LoRA with a learning rate of 6e \u2212 4 and a batch size of 32 sequences per gradient step for a maximum of 4 epochs. The best checkpoint is selected based on the validation loss on a held-out 100 instances. SWE-Llama 7b was trained in 20 hours on 4 NVIDIA A100s, and SWE-Llama 13b was trained in 47 hours on 8 NVIDIA A100s. DeepSpeed Ulysses and Flash Attention were used to enable long context training.",
+    "id": "85d75df3-142e-4d4a-848e-46a78e85e81b"
+  },
+  {
+    "filename": "6476_swe_bench_can_language_models_.pdf",
+    "content": " The subsection does not provide information about the dataset used for training the model.",
+    "id": "13554988-e30d-47c0-82f6-9399a209998b"
+  },
+  {
+    "filename": "6476_swe_bench_can_language_models_.pdf",
+    "content": " The subsection does not provide information about the dataset used for training the model.",
+    "id": "681cf648-4541-4454-b585-540c0428b4e2"
+  },
+  {
+    "filename": "6476_swe_bench_can_language_models_.pdf",
+    "content": " The subsection does not provide information about the dataset used for training the model.",
+    "id": "4af01413-426f-43c4-a563-f146981db9c6"
+  },
+  {
+    "filename": "4430_meta_continual_learning_revisi.pdf",
+    "content": " The subsection provided does not contain information about the specific dataset used for training the model. It only mentions three datasets (Seq-CIFAR10, Seq-CIFAR100, and Seq-TinyImageNet) in the context of reporting experimental results.",
+    "id": "3b6cea80-f618-4d61-893b-86b7e4d97625"
+  },
+  {
+    "filename": "4430_meta_continual_learning_revisi.pdf",
+    "content": " The subsection provided does not contain information about the specific dataset used for training the model. It discusses the continual learning settings, evaluation metrics, baselines, and training details for a model, but it does not specify the dataset used.",
+    "id": "eb335d4c-2e44-4707-87cf-490f59f2c940"
+  },
+  {
+    "filename": "4430_meta_continual_learning_revisi.pdf",
+    "content": " The subsection provided does not mention any specific dataset used for training the model. It focuses on the proof and lemmas related to the convergence of the model's parameters.",
+    "id": "d8184bc9-de47-4c21-9974-aa243e1eddf1"
+  },
+  {
+    "filename": "4430_meta_continual_learning_revisi.pdf",
+    "content": " The Seq-CIFAR10 and Seq-CIFAR100 datasets are used for training the model.",
+    "id": "0f7895d4-de04-4a29-b7ed-7d54cd8f5b40"
+  },
+  {
+    "filename": "4430_meta_continual_learning_revisi.pdf",
+    "content": " The subsection provided does not specify the dataset used for training the model. It contains tables and information about the performance of different methods on various datasets, but it does not mention which dataset is being used in the context of your question.",
+    "id": "7f8510d4-9775-4a93-b2a0-b26ec2ee50cb"
+  }
 ]
