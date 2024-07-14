@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ESNext",
+    "esModuleInterop": true,
+    "noEmit": false,
+    "noEmitOnError": false
+  },
+  "exclude": [
+    "node_modules",
+    "gen/**/*",
+    "gen/runtime.ts"
+  ]
+}
