@@ -106,8 +106,7 @@ def get_text_from_ids(output_ids, json_file="data.json"):
     return ret_list
 
 if __name__ == "__main__":
-    pdf_folder = '/Users/justin/Desktop/Everything/Code/small_model_moe_rag/data/pdf/'
-    prompt = "What dataset is used for training the model?"
+    pdf_folder = 'C:\\Users\\tobia\\Downloads\\llama-index-pdf'
 
 
     # if number == 0:
